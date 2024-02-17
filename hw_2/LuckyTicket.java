@@ -2,24 +2,39 @@ package hw_2;
 
 import utils.FilesTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LuckyTicket {
     public static final int MIN = 0;
     public static final int MAX = 9;
+    public static final String SUCCESS = "Test passed";
+    public static final String NOT_SUCCESS = "Test NOT passed";
 
     public static void main(String[] args) {
         final var filesTest = new FilesTest();
         final var testFileByPath = filesTest.getTestFileByPath("hw_2/tickets");
+        final var sbResult = new StringBuffer();
+        final var luckyCounter = new LuckyCounter();
 
         testFileByPath.forEach((aLong, aLong2) -> {
-            System.out.println("----------------------------------------------");
-            System.out.println("Amount of elements: " + aLong);
-            final var luckyCounter = new LuckyCounter();
-            luckyCounter.countLuckyTicketsByAmountOfElements(aLong, 0, 0);
-            System.out.println("Count result: " + luckyCounter.getCounter());
-            System.out.println("Expected result: " + aLong2);
-            System.out.println(luckyCounter.getCounter() == aLong2 ? "Test passed" : "Test NOT passed");
-            System.out.println("----------------------------------------------");
+            sbResult.append("----------------------------------------------\n")
+                    .append("Amount of elements: ")
+                    .append(aLong)
+                    .append("\n");
+            luckyCounter.countLuckyTicketsByPreviousTenElements(aLong.intValue());
+            sbResult.append("Count result: ")
+                    .append(luckyCounter.getCounter())
+                    .append("\n")
+                    .append("Expected result: ")
+                    .append(aLong2)
+                    .append("\n")
+                    .append(luckyCounter.getCounter() == aLong2 ? SUCCESS : NOT_SUCCESS)
+                    .append("\n");
         });
+        System.out.println(sbResult.append("----------------------------------------------"));
+        System.out.println(sbResult.toString().contains(NOT_SUCCESS) ? "WARNING! Errors in the result"
+                : "All the tests passed successfully");
     }
 
     public int countAmountOfLuckyTicketsForSix0() {
@@ -103,8 +118,10 @@ public class LuckyTicket {
 
     static class LuckyCounter {
         private long counter = 0;
+        private List<Long> currentNumbers = new ArrayList<>();
+        private List<Long> previousNumbers = new ArrayList<>();
 
-        public void countLuckyTicketsByAmountOfElements(long amountOfElementsInAHalf, long sumA, long sumB) {
+        public void countLuckyTicketsByAmountOfElementsBrootForce(long amountOfElementsInAHalf, long sumA, long sumB) {
 
             if (amountOfElementsInAHalf == 1) {
                 final var dif = Math.abs(sumA - sumB);
@@ -116,9 +133,50 @@ public class LuckyTicket {
 
             for (int a = 0; a < 10; a++) {
                 for (int b = 0; b < 10; b++) {
-                    countLuckyTicketsByAmountOfElements(amountOfElementsInAHalf - 1, sumA + a, sumB + b);
+                    countLuckyTicketsByAmountOfElementsBrootForce(amountOfElementsInAHalf - 1, sumA + a, sumB + b);
                 }
             }
+        }
+
+        public void countLuckyTicketsByPreviousTenElements(int n) {
+            if (n == 0) {
+                counter = 0;
+                return;
+            }
+            if (n == 1) {
+                for (int i = MIN; i <= MAX; i++) {
+                    previousNumbers.add(i, 1L);
+                }
+                counter = previousNumbers.size();
+                return;
+            }
+
+            for (int j = MIN; j <= MAX * n; j++) {
+                var c = countPreviousTenSum(previousNumbers, j);
+                currentNumbers.add(j, c);
+            }
+
+            counter = currentNumbers.stream()
+                    .map(aLong -> aLong * aLong)
+                    .mapToLong(value -> value)
+                    .sum();
+            previousNumbers = currentNumbers;
+            currentNumbers = new ArrayList<>();
+        }
+
+        private long countPreviousTenSum(List<Long> previousNumbers, int curIndex) {
+            long counter = 0;
+            //current index value in current column equals sum of last ten elements in previous column
+            for (int i = MAX; i >= MIN; i--) {
+                if (curIndex >= 0 && curIndex < previousNumbers.size()) {
+                    counter = counter + previousNumbers.get(curIndex);
+                }
+                curIndex--;
+                if (curIndex < 0) {
+                    break;
+                }
+            }
+            return counter;
         }
 
         public long getCounter() {
