@@ -156,10 +156,15 @@ public class LuckyTicket {
                 currentNumbers.add(j, c);
             }
 
-            counter = currentNumbers.stream()
+            final int lastIndex = (currentNumbers.size() / 2);
+
+            counter = currentNumbers.subList(0, lastIndex).stream()
                     .map(aLong -> aLong * aLong)
                     .mapToLong(value -> value)
-                    .sum();
+                    .sum() * 2;
+            if (currentNumbers.size() % 2 != 0) {
+                counter = counter + (currentNumbers.get(lastIndex) * currentNumbers.get(lastIndex));
+            }
             previousNumbers = currentNumbers;
             currentNumbers = new ArrayList<>();
         }
