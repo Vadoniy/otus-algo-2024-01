@@ -1,5 +1,6 @@
 package hw_3;
 
+import hw_3.model.ArrayListWrapper;
 import hw_3.model.FactorArray;
 import hw_3.model.IArray;
 import hw_3.model.MatrixArray;
@@ -15,7 +16,7 @@ public class Program {
     public static void main(String[] args) {
         Stream.of(new SingleArray<Date>(), new VectorArray<Date>(), new FactorArray<Date>(), new MatrixArray<Date>())
                         .forEach(Program::testIfArrayWorks);
-        Stream.of(new SingleArray<Date>(), new VectorArray<Date>(), new FactorArray<Date>(), new MatrixArray<Date>())
+        Stream.of(new SingleArray<Date>(), new VectorArray<Date>(), new FactorArray<Date>(), new MatrixArray<Date>(), new ArrayListWrapper<Date>())
                 .forEach(Program::testAddArray);
     }
 
