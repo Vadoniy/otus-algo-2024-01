@@ -4,7 +4,7 @@ public class SingleArray<T> implements IArray<T> {
 
     private Object[] array;
 
-    public SingleArray () {
+    public SingleArray() {
         array = new Object[0];
     }
 
@@ -23,7 +23,7 @@ public class SingleArray<T> implements IArray<T> {
     public void add(T item, int index) {
 
         if (index >= size()) {
-            resize(index+1);
+            resize(index + 1);
         }
 
         array[index] = item;
@@ -33,28 +33,24 @@ public class SingleArray<T> implements IArray<T> {
     public T remove(int index) {
         var element = array[index];
         array[index] = null;
-        return (T)element;
+        return (T) element;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public T get(int index) {
-        return (T)array[index];
+        return (T) array[index];
     }
 
     private void resize() {
         Object[] newArray = new Object[size() + 1];
         System.arraycopy(array, 0, newArray, 0, size());
-//        for (int j = 0; j < size(); j ++)
-//            newArray[j] = array[j];
         array = newArray;
     }
 
     private void resize(int i) {
         Object[] newArray = new Object[size() + i];
         System.arraycopy(array, 0, newArray, 0, size());
-//        for (int j = 0; j < size(); j ++)
-//            newArray[j] = array[j];
         array = newArray;
     }
 }
