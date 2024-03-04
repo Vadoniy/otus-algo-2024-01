@@ -2,18 +2,20 @@ package hw_2;
 
 import utils.FilesTest;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
+import static utils.FilesTest.NOT_SUCCESS;
+import static utils.FilesTest.SUCCESS;
 
 public class LuckyTicket {
     public static final int MIN = 0;
     public static final int MAX = 9;
-    public static final String SUCCESS = "Test passed";
-    public static final String NOT_SUCCESS = "Test NOT passed";
 
     public static void main(String[] args) {
         final var filesTest = new FilesTest();
-        final var testFileByPath = filesTest.getTestFileByPath("hw_2/tickets");
+        final var testFileByPath = filesTest.getTestFileByPathBigInteger("hw_2/tickets");
         final var sbResult = new StringBuffer();
         final var luckyCounter = new LuckyCounter();
 
@@ -29,7 +31,7 @@ public class LuckyTicket {
                     .append("Expected result: ")
                     .append(aLong2)
                     .append("\n")
-                    .append(luckyCounter.getCounter() == aLong2 ? SUCCESS : NOT_SUCCESS)
+                    .append(aLong2.equals(BigInteger.valueOf(luckyCounter.getCounter())) ? SUCCESS : NOT_SUCCESS)
                     .append("\n");
         });
         System.out.println(sbResult.append("----------------------------------------------"));
