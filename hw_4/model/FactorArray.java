@@ -1,39 +1,41 @@
-package hw_3.model;
+package hw_4.model;
 
-public class VectorArray<T> implements IArray<T> {
+public class FactorArray<T> implements IArray<T> {
 
     private Object[] array;
-    private int vector;
-    private int size;
+    private int factor;
+    private int indexToAdd;
 
-    public VectorArray(int vector) {
-        this.vector = vector;
-        array = new Object[0];
-        size = 0;
+    public FactorArray(int factor, int initLength) {
+        this.factor = factor;
+        array = new Object[initLength];
+        indexToAdd = 0;
     }
 
-    public VectorArray() {
-        this(10);
+    public FactorArray() {
+        this(50, 10);
     }
 
     @Override
     public int size() {
-        return size;
+        return array.length;
     }
 
     @Override
     public void add(T item) {
-        if (size() >= array.length)
+        if (indexToAdd == size())
             resize();
-        array[size-1] = item;
-        size++;
+        array[indexToAdd] = item;
+        indexToAdd++;
     }
 
     @Override
     public void add(T item, int index) {
+
         while (index >= size()) {
             resize();
         }
+
         array[index] = item;
     }
 
@@ -41,19 +43,18 @@ public class VectorArray<T> implements IArray<T> {
     public T remove(int index) {
         var element = array[index];
         array[index] = null;
-        return (T)element;
+        return (T) element;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public T get(int index) {
-        return (T)array[index];
+        return (T) array[index];
     }
 
     private void resize() {
-        Object[] newArray = new Object[array.length + vector];
+        Object[] newArray = new Object[array.length + (array.length * factor) / 100];
         System.arraycopy(array, 0, newArray, 0, array.length);
         array = newArray;
-        size = array.length;
     }
 }

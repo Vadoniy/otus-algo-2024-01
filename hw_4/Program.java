@@ -1,11 +1,11 @@
-package hw_3;
+package hw_4;
 
-import hw_3.model.ArrayListWrapper;
-import hw_3.model.FactorArray;
-import hw_3.model.IArray;
-import hw_3.model.MatrixArray;
-import hw_3.model.SingleArray;
-import hw_3.model.VectorArray;
+import hw_4.model.ArrayListWrapper;
+import hw_4.model.FactorArray;
+import hw_4.model.IArray;
+import hw_4.model.MatrixArray;
+import hw_4.model.SingleArray;
+import hw_4.model.VectorArray;
 
 import java.util.Date;
 import java.util.Random;

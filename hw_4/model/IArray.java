@@ -1,4 +1,4 @@
-package hw_3.model;
+package hw_4.model;
 
 public interface IArray<T> {
     int size();
