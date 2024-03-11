@@ -1,6 +1,7 @@
 package hw_6;
 
 import utils.ArrayUtils;
+import utils.Sorter;
 
 public class Application {
 
