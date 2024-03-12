@@ -73,6 +73,48 @@ public class Sorter {
         System.out.println("Heap sort completed in " + (stop - start) + " for " + size + " elements");
     }
 
+    public void quickSort(int[] arr) {
+        final var start = System.nanoTime();
+        final var size = arr.length;
+
+        quickSortR(arr, 0, size - 1);
+
+        final var stop = System.nanoTime();
+        System.out.println("Quick sort completed in " + (stop - start) + " for " + size + " elements");
+    }
+
+    public void mergeSort(int[] arr) {
+        final var start = System.nanoTime();
+        final var size = arr.length;
+
+        final var stop = System.nanoTime();
+        System.out.println("Merge sort completed in " + (stop - start) + " for " + size + " elements");
+    }
+
+    private void quickSortR(int[] arr, int l, int r) {
+        if (l >= r) {
+            return;
+        }
+
+        int m = split(arr, l, r);
+        quickSortR(arr, l, m - 1);
+        quickSortR(arr, m + 1, r);
+    }
+
+    private int split(int[] arr, int l, int r) {
+//        p - опорный элемент
+        var p = arr[r];
+        var m = l - 1;
+
+        for (int j = l; j <= r; j++) {
+            if (arr[j] <= p) {
+                m++;
+                swap(arr, m, j);
+            }
+        }
+
+        return m;
+    }
 
     private void swap(int[] arr, int x, int y) {
         final var temp = arr[x];
