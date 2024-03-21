@@ -87,8 +87,49 @@ public class Sorter {
         final var start = System.nanoTime();
         final var size = arr.length;
 
+        mergeSortR(arr, 0, arr.length - 1);
+
         final var stop = System.nanoTime();
         System.out.println("Merge sort completed in " + (stop - start) + " for " + size + " elements");
+    }
+
+    private void mergeSortR(int[] arr, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int middle = (left + right) / 2;
+        mergeSortR(arr, left, middle);
+        mergeSortR(arr, middle + 1, right);
+        merge(arr, left, middle, right);
+    }
+
+    private void merge(int[] arr, int left, int middle, int right) {
+        int[] tempArr = new int[right - left + 1];
+        int a = left;
+        int b = middle + 1;
+        int m = 0;
+
+        while (a <= middle && b <= right) {
+            if (arr[a] > arr[b]) {
+                tempArr[m++] = arr[b++];
+            } else {
+                tempArr[m++] = arr[a++];
+            }
+        }
+        while (a <= middle) {
+            tempArr[m++] = arr[a++];
+        }
+
+        while (b <= right) {
+            tempArr[m++] = arr[b++];
+        }
+
+        if (right - left >= 0) {
+            System.arraycopy(tempArr, 0, arr, left, right - left + 1);
+        }
+//        for (int i = left; i <= right; i++) {
+//            arr[i] = tempArr[i - left];
+//        }
     }
 
     private void quickSortR(int[] arr, int l, int r) {
