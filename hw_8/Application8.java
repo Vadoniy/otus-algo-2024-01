@@ -12,15 +12,8 @@ public class Application8 {
             sorter.quickSort(ArrayUtils.generateIntArray((int) Math.pow(10, i)));
         }
 
-//        for (int i = 2; i <= 6; i++) {
-//            sorter.mergeSort(ArrayUtils.generateIntArray((int) Math.pow(10, i)));
-//        }
-//        for (int i = 2; i <= 3; i++) {
-////            sorter.quickSort(ArrayUtils.generateIntArray((int) Math.pow(10, i)));
-//            var arr = ArrayUtils.generateIntArray((int) Math.pow(10, 1));
-//            System.out.println(Arrays.toString(arr));
-//            sorter.mergeSort(arr);
-//            System.out.println(Arrays.toString(arr));
-//        }
+        for (int i = 2; i <= 6; i++) {
+            sorter.mergeSort(ArrayUtils.generateIntArray((int) Math.pow(10, i)));
+        }
     }
 }
