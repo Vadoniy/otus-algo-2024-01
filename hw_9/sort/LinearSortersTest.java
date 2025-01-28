@@ -15,7 +15,7 @@ public class LinearSortersTest {
 
     private static final Map<LinearSorter, int[]> SORTER_TO_ARRAY_MAP = new HashMap<>(3);
     private static final StringBuffer SB = new StringBuffer();
-    private static final String RESULT_FORMAT_PATTER = "    %s  :   %s  for %s  values  with    %s  maxValue\n";
+    private static final String RESULT_FORMAT_PATTER = "%s:\t%s\tfor\t%s\tvalues\twith\t%s\tmaxValue\n";
     private static final int MAX_VALUE = 1000;
     private static final List<Integer> AMOUNT_OF_ELEMENTS = List.of(
             BigInteger.valueOf(10).pow(2).intValue(),
@@ -46,6 +46,8 @@ public class LinearSortersTest {
         final var startTime = System.currentTimeMillis();
         sorter.sort(inputArray, MAX_VALUE);
         final var endTime = System.currentTimeMillis();
-        SB.append(String.format(RESULT_FORMAT_PATTER, sorter.getClass().getSimpleName(), endTime - startTime, inputArray.length, MAX_VALUE));
+        final var sorterName = sorter.getClass().getSimpleName();
+        final var sorterNameWithTab = sorterName.length() > 10 ? sorterName + "\t" : sorterName + "\t\t";
+        SB.append(String.format(RESULT_FORMAT_PATTER, sorterNameWithTab, endTime - startTime, inputArray.length, MAX_VALUE));
     }
 }
