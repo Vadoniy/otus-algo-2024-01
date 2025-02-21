@@ -3,31 +3,26 @@ package hw_17;
 public class DijkstraTest {
 
     public static void main(String[] args) {
-        int[][] graph =
-                {
-                        {0, 7, 9, 0, 0, 14},
-                        {7, 0, 10, 15, 0, 0},
-                        {9, 10, 0, 11, 0, 2},
-                        {0, 15, 11, 0, 6, 0},
-                        {0, 0, 0, 6, 0, 9},
-                        {14, 0, 2, 0, 9, 0},
-                };
+        int[][] graph = {
+                {2, 3, 6, -1, -1, -1},  // Вершина 1 → {2, 3, 6}
+                {1, 3, 4, -1, -1, -1},  // Вершина 2 → {1, 3, 4}
+                {1, 2, 4, 6, -1, -1},   // Вершина 3 → {1, 2, 4, 6}
+                {2, 3, 5, -1, -1, -1},  // Вершина 4 → {2, 3, 5}
+                {4, 6, -1, -1, -1, -1}, // Вершина 5 → {4, 6}
+                {1, 3, 5, -1, -1, -1}   // Вершина 6 → {1, 3, 5}
+        };
 
+        final int vertexCount = graph.length;
         final var dijkstra = new Dijkstra();
 
-        for (var vertex = 0; vertex < graph.length; vertex++) {
-            final var distances = dijkstra.sort(graph, 6, vertex);
-
-            System.out.println("Минимальные пути из вершины " + (vertex + 1) + ":");
-            for (var i = 0; i < graph.length; i++) {
-                // Выводим расстояние от вершины vertex до каждой из других вершин
-                if (distances[i] == 1_000_000_000) {
-                    System.out.println("До вершины " + (i + 1) + ": нет пути");
-                } else {
-                    System.out.println("До вершины " + (i + 1) + ": " + distances[i]);
+        for (int i = 1; i < graph.length; i++) {
+            final var distances = dijkstra.sort(graph, vertexCount, i);
+            System.out.println("Кратчайший путь при старте из вершины " + i + ":");
+            for (Edge edge : distances) {
+                if (edge != null) {
+                    System.out.println(edge);
                 }
             }
-            System.out.println();
         }
     }
 }
