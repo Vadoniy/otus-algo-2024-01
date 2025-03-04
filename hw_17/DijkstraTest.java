@@ -24,5 +24,14 @@ public class DijkstraTest {
                 }
             }
         }
+
+        System.out.println("\nКратчайший путь от вершины 2 до вершины 5:");
+
+        final var edges = dijkstra.sort(graph, vertexCount, 2, 5);
+        for (Edge edge : edges) {
+            if (edge != null) {
+                System.out.println(edge);
+            }
+        }
     }
 }
