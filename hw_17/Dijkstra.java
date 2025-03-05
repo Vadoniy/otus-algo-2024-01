@@ -25,6 +25,10 @@ public class Dijkstra {
         for (var k = 0; k < vertexCount; k++) {
             final var minVertex = getMinDistanceVertex(distances, visited);
 
+            if (vertexToFind != null && minVertex == vertexToFind - 1) {
+                break; //Нашли нужную вершину, выходим
+            }
+
             if (minVertex == -1) {
                 break;
             }
@@ -44,10 +48,6 @@ public class Dijkstra {
                     edges[edgeIndex++] = new Edge(minVertex + 1, neighbor + 1); // 1 - индексация
                     prev[neighbor] = minVertex; // Запоминаем, из какой вершины пришли в текущую
                 }
-            }
-
-            if (vertexToFind != null && minVertex == vertexToFind - 1) {
-                break; //Нашли нужную вершину, выходим
             }
         }
         if (vertexToFind != null) {
