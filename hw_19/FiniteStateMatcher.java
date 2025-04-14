@@ -10,8 +10,8 @@ public class FiniteStateMatcher extends FindTargetAlgo {
         var state = 0;
 
         for (int i = 0; i < text.length(); i++) {
-            state = delta[state][text.charAt(i)];
             cmp++;
+            state = delta[state][text.charAt(i)];
 
             if (state == m) {
                 return true;
