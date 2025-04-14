@@ -1,5 +1,7 @@
 package hw_18;
 
+import utils.FindTargetAlgo;
+
 public class BruteForceAlgo extends FindTargetAlgo {
     public boolean findTarget(String text, String targetText) {
         var textArr = text.toCharArray();

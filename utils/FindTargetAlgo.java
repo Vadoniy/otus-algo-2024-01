@@ -1,10 +1,10 @@
-package hw_18;
+package utils;
 
 public abstract class FindTargetAlgo {
     protected final int ALPHABET_SIZE = 256;
     protected int cmp;
 
-    protected FindTargetAlgo() {
+    public FindTargetAlgo() {
         this.cmp = 0;
     }
 
@@ -18,10 +18,10 @@ public abstract class FindTargetAlgo {
             return true;
         }
 
-        return check(text, targetText);
+        return findTarget(text, targetText);
     }
 
-    protected abstract boolean findTarget(String text, String targetText);
+    public abstract boolean findTarget(String text, String targetText);
 
     public int getCmp() {
         return cmp;

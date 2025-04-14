@@ -1,4 +1,4 @@
-package hw_18;
+package hw_19;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class FindTargetAppTest {
         System.out.println("Text: " + text);
         System.out.println("Text to find: " + targetText);
 
-        final var findersList = List.of(new BruteForceAlgo(), new SearchWithPrefixAlgo(), new BoyerMooreAlgo());
+        final var findersList = List.of(new FiniteStateMatcher());
 
         for (var finder : findersList) {
             System.out.printf((RESULT_PATTERN) + "%n",
