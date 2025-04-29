@@ -25,8 +25,12 @@ public class Tree {
                         }
                         dp = next;
                     }
-                    System.out.println("Fact = " + dp[0] + ", expected = " + sum + "; result is "
-                            + (dp[0] == sum ? "correct" : "INCORRECT"));
+
+                    if (dp[0] == sum) {
+                        System.out.println("Fact = " + dp[0] + ", expected = " + sum + "; result is correct");
+                    } else {
+                        throw new RuntimeException("INCORRECT RESULT: expected " + sum + ",  but was " + dp[0]);
+                    }
                 }
         );
     }

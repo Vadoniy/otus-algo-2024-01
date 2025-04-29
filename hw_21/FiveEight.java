@@ -41,8 +41,12 @@ public class FiveEight {
 
             final var result = dp[numberLength][0][1] + dp[numberLength][0][2] +
                     dp[numberLength][1][1] + dp[numberLength][1][2];
-            System.out.println("Fact = " + result + ", expected = " + s2 + "; result is "
-                    + (Long.parseLong(s2) == result ? "correct" : "INCORRECT"));
+
+            if (Long.parseLong(s2) == result) {
+                System.out.println("Fact = " + result + ", expected = " + s2 + "; result is correct");
+            } else {
+                throw new RuntimeException("INCORRECT RESULT: expected " + s2 + ",  but was " + result);
+            }
         });
     }
 }
