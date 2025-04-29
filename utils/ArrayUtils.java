@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class ArrayUtils {
@@ -31,5 +32,15 @@ public class ArrayUtils {
             System.out.println("Created array: " + Arrays.toString(arr));
         }
         return arr;
+    }
+
+    public static byte[] toByteArray(List<Byte> byteArrayList) {
+        final var result = new byte[byteArrayList.size()];
+
+        for (int i = 0; i < byteArrayList.size(); i++) {
+            result[i] = byteArrayList.get(i);
+        }
+
+        return result;
     }
 }
