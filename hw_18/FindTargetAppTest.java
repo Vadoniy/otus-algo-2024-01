@@ -17,7 +17,7 @@ public class FindTargetAppTest {
         for (var finder : findersList) {
             System.out.printf((RESULT_PATTERN) + "%n",
                     finder.getClass().getSimpleName(),
-                    finder.findTarget(text, targetText),
+                    finder.check(text, targetText),
                     finder.getCmp());
         }
     }

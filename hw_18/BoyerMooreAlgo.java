@@ -1,5 +1,7 @@
 package hw_18;
 
+import utils.FindTargetAlgo;
+
 import java.util.Arrays;
 
 public class BoyerMooreAlgo extends FindTargetAlgo {
